@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL Authentication and Authorization in DotNet 6", "GraphQL Authentication and Authorization in DotNet 6\GraphQL Authentication and Authorization in DotNet 6.csproj", "{F812A1BE-C919-4449-9834-722701CBD1B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnBoarding", "OnBoarding\OnBoarding.csproj", "{F812A1BE-C919-4449-9834-722701CBD1B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
