@@ -6,5 +6,5 @@ namespace OnBoarding.Entities;
 public enum Count
 {
     Down = -1,
-    Up=1
+    Up = 1
 }
