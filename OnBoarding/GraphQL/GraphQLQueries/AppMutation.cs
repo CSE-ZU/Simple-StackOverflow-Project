@@ -10,14 +10,25 @@ public class AppMutation : ObjectGraphType
 {
     public AppMutation(IUserRepository userRepository)
     {
-        Field<UserType>(
+        Field<UserRegisterResponseType>(
             "Register",
             arguments: new QueryArguments(
-                new QueryArgument<NonNullGraphType<UserInputType>> { Name = "user" }),
+                new QueryArgument<NonNullGraphType<UserRegisterRequestType>> { Name = "user" }),
             resolve: context =>
             {
                 var user = context.GetArgument<User>("user");
                 return userRepository.Register(user);
+            }
+        );
+
+        Field<UserLoginResponseType>(
+            "Login",
+            arguments: new QueryArguments(
+                new QueryArgument<NonNullGraphType<UserLoginRequestType>> { Name = "user" }),
+            resolve: context =>
+            {
+                var user = context.GetArgument<User>("user");
+                return userRepository.Login(user.Email, user.Password);
             }
         );
     }

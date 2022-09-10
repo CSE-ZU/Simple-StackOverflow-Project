@@ -7,6 +7,7 @@ public interface IUserRepository
     IEnumerable<User> GetAll();
     User Register(User user);
 
-    // User Login(string email, string password);
     User GetUserById(string id);
+    
+    LoginResponse Login(string email, string password);
 }

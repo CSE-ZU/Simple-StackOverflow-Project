@@ -1,6 +1,7 @@
 
 using GraphQL.Server;
 using Microsoft.EntityFrameworkCore;
+using OnBoarding.Authorization;
 using OnBoarding.GraphQL.GraphQLSchema;
 using OnBoarding.Helper;
 using OnBoarding.Repositories.AnswerRepositories;
@@ -18,6 +19,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseNpgsql(connectionS
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 builder.Services.AddScoped<IAnswerRepository, AnswerRepository>();
+builder.Services.AddScoped<IJwtUtils, JwtUtils>();
 
 // Add services to the container.
 
@@ -35,6 +37,8 @@ builder.Services.AddGraphQL(options =>
     .AddSystemTextJson()
     .AddGraphTypes(typeof(AppSchema), ServiceLifetime.Scoped);
 
+builder.Services.Configure<JwtTokenConfig>(builder.Configuration.GetSection("AppSettings"));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -48,6 +52,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 

@@ -2,13 +2,14 @@ using GraphQL.Types;
 
 namespace OnBoarding.GraphQL.GraphQLTypes;
 
-public class UserInputType : InputObjectGraphType
+public class UserLoginRequestType : InputObjectGraphType
 {
-    public UserInputType()
+    //request
+    public UserLoginRequestType()
     {
-        Name = "userInput";
-        Field<NonNullGraphType<StringGraphType>>("username");
+        Name = "userLoginRequest";
         Field<NonNullGraphType<StringGraphType>>("email");
         Field<NonNullGraphType<StringGraphType>>("password");
     }
+
 }
