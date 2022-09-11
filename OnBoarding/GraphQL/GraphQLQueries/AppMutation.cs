@@ -12,6 +12,7 @@ public class AppMutation : ObjectGraphType
 {
     public AppMutation(IUserRepository userRepository, IQuestionRepository questionRepository)
     {
+        
         Field<UserRegisterResponseType>(
             "Register",
             arguments: new QueryArguments(
@@ -19,6 +20,7 @@ public class AppMutation : ObjectGraphType
             resolve: context =>
             {
                 var user = context.GetArgument<User>("user");
+                
                 return userRepository.Register(user);
             }
         );

@@ -15,10 +15,13 @@ public class JwtMiddleware
     {
         var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
         var userId = jwtUtils.ValidateToken(token);
+        // var id = Guid.Parse(userId);
         if (userId != null)
+        {
+            var user = userRepository.GetUserById(Guid.Parse(userId));
             // attach user to context on successful jwt validation
-            context.Items["User"] = userRepository.GetUserById(userId);
-
+            context.Items["User"] = user;
+        }
         await _next(context);
     }
 }

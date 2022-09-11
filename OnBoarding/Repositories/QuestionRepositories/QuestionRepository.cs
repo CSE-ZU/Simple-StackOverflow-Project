@@ -14,6 +14,8 @@ public class QuestionRepository : IQuestionRepository
         _context = context;
     }
 
+
+
     public async Task<Question> GetQuestionById(Guid id)
     {
         return await _context.Questions.FindAsync(id);
@@ -30,5 +32,15 @@ public class QuestionRepository : IQuestionRepository
         await _context.Questions.AddAsync(question);
         await _context.SaveChangesAsync();
         return question;
+    }
+
+    // public async Task<Question> GetQuestionByUserId(Guid userId)
+    // {
+    //    
+    // }
+    public IEnumerable<Question> GetQuestionByUserId(Guid userId)
+    {
+        var result =  _context.Questions.Where(q => q.UserId.Equals(userId)).ToList();
+         return  result;
     }
 }

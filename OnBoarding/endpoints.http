@@ -1,0 +1,25 @@
+//get all users
+POST https://localhost:7276/graphql
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query{
+  users{
+    id,
+    userName,
+    email,
+  }
+}
+
+# mutation($User: userLoginRequest!) {
+#   login(user: $User) {
+#     token
+#   }
+# }
+
+# {
+#   "User":{
+#     "email":"Updated Address",
+#     "password": "test"
+#   }
+# }

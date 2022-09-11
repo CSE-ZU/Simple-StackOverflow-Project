@@ -18,9 +18,8 @@ public class UserRepository : IUserRepository
     
     public IEnumerable<User> GetAll() => _context.Users.ToList();
 
-    public User GetUserById(string id)
+    public User GetUserById(Guid id)
     {
-        
         return _context.Users.SingleOrDefault(o => o.Id.Equals(id));
     }
 

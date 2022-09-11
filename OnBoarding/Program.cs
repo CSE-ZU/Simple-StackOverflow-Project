@@ -1,5 +1,6 @@
 
 using GraphQL.Server;
+using GraphQL.Types;
 using Microsoft.EntityFrameworkCore;
 using OnBoarding.Authorization;
 using OnBoarding.GraphQL.GraphQLSchema;
@@ -23,13 +24,13 @@ builder.Services.AddScoped<IJwtUtils, JwtUtils>();
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson();;
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
 
-
-builder.Services.AddScoped<AppSchema>();
+builder.Services.AddScoped<ISchema, AppSchema>();
 builder.Services.AddGraphQL(options =>
     {
 
@@ -45,7 +46,6 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    // add altair UI to development only
     app.UseGraphQLPlayground();
 }
 
@@ -53,10 +53,11 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 app.UseAuthentication();
+app.UseMiddleware<JwtMiddleware>();
 
 app.MapControllers();
 
-app.UseGraphQL<AppSchema>();
+// app.UseGraphQL<AppSchema>();
 app.UseGraphQLPlayground(options: new GraphQL.Server.Ui.Playground.PlaygroundOptions());
 
 app.Run();
