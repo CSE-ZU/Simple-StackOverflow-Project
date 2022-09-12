@@ -1,3 +1,4 @@
+using OnBoarding.GraphQL;
 using OnBoarding.Repositories.UserRepositories;
 
 namespace OnBoarding.Authorization;
@@ -18,6 +19,7 @@ public class JwtMiddleware
         // var id = Guid.Parse(userId);
         if (userId != null)
         {
+            
             var user = userRepository.GetUserById(Guid.Parse(userId));
             // attach user to context on successful jwt validation
             context.Items["User"] = user;

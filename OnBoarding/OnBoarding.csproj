@@ -11,12 +11,16 @@
         <PackageReference Include="GraphQL" Version="4.6.1" />
         <PackageReference Include="GraphQL.Authorization" Version="4.0.0" />
         <PackageReference Include="GraphQL.MicrosoftDI" Version="4.6.1" />
+        <PackageReference Include="GraphQL.Server" Version="1.7.0.1" />
         <PackageReference Include="GraphQL.Server.Authorization.AspNetCore" Version="5.0.2" />
         <PackageReference Include="GraphQL.Server.Transports.AspNetCore.SystemTextJson" Version="5.0.2" />
         <PackageReference Include="GraphQL.Server.Ui.Playground" Version="7.1.0" />
         <PackageReference Include="GraphQL.SystemTextJson" Version="4.6.1" />
+        <PackageReference Include="HotChocolate.AspNetCore" Version="11.0.2" />
+        <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="12.13.2" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.8" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
         <PackageReference Include="Npgsql" Version="6.0.6" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.6" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.5" />
@@ -25,6 +29,7 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.23.1" />
     </ItemGroup>
 
 </Project>

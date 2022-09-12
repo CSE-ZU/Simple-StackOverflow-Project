@@ -1,4 +1,3 @@
-
 using GraphQL.Server;
 using GraphQL.Types;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +20,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 builder.Services.AddScoped<IAnswerRepository, AnswerRepository>();
 builder.Services.AddScoped<IJwtUtils, JwtUtils>();
+// builder.Services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+// builder.Services.AddScoped<AppSchema>();
 
 // Add services to the container.
 
@@ -29,16 +30,17 @@ builder.Services.AddControllers().AddNewtonsoftJson();;
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-
+// builder.Services.AddScoped<IDependencyResolver>(x => new FuncDependencyResolver(x.GetRequiredService));
 builder.Services.AddScoped<ISchema, AppSchema>();
 builder.Services.AddGraphQL(options =>
     {
-
+        options.EnableMetrics = true;
     })
     .AddSystemTextJson()
     .AddGraphTypes(typeof(AppSchema), ServiceLifetime.Scoped);
 
 builder.Services.Configure<JwtTokenConfig>(builder.Configuration.GetSection("AppSettings"));
+
 
 var app = builder.Build();
 
@@ -50,11 +52,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 app.UseMiddleware<JwtMiddleware>();
-
 app.MapControllers();
 
 // app.UseGraphQL<AppSchema>();

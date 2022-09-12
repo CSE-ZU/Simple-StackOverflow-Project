@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using OnBoarding.Entities;
@@ -30,9 +31,15 @@ public class JwtUtils : IJwtUtils
         var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
+            Subject = new ClaimsIdentity(new[]
+            {
+                new Claim("id", user.Id.ToString()),
+                new Claim("Role", "Admin"),
+            }),
             Expires = DateTime.UtcNow.AddDays(7),
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            SigningCredentials = new SigningCredentials(
+                new SymmetricSecurityKey(key), 
+                SecurityAlgorithms.HmacSha256Signature)
         };
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
@@ -68,4 +75,5 @@ public class JwtUtils : IJwtUtils
             return null;
         }
     }
+    
 }

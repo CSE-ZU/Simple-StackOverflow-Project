@@ -11,7 +11,7 @@ using OnBoarding.GraphQL;
 namespace OnBoarding.Controllers;
 
 [ApiController]
-[Authorize]
+// [Authorize]
 public class GraphQLController : ControllerBase
 {
     private readonly ISchema _schema;
@@ -54,6 +54,7 @@ public class GraphQLController : ControllerBase
         {
             if (HttpContext.Items.TryGetValue("GraphQLUserContext", out object? user) && user != null)
             {
+                executionOptions.UserContext = user as GraphQLUserContext;
                 executionOptions.UserContext = user as GraphQLUserContext;
             }
         }

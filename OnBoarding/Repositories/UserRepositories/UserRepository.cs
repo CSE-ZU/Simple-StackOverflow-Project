@@ -4,6 +4,7 @@ using OnBoarding.Helper;
 
 namespace OnBoarding.Repositories.UserRepositories;
 
+
 public class UserRepository : IUserRepository
 {
     private readonly ApplicationDbContext _context;
@@ -20,7 +21,9 @@ public class UserRepository : IUserRepository
 
     public User GetUserById(Guid id)
     {
-        return _context.Users.SingleOrDefault(o => o.Id.Equals(id));
+        var user = _context.Users.Find(id);
+        if (user == null) throw new KeyNotFoundException("User not found");
+        return user;
     }
 
     public User Register(User user)
