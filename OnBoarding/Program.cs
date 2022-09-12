@@ -1,7 +1,12 @@
+using System.Text;
 using GraphQL.Server;
 using GraphQL.Types;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using OnBoarding.Authorization;
+using OnBoarding.GraphQL;
 using OnBoarding.GraphQL.GraphQLSchema;
 using OnBoarding.Helper;
 using OnBoarding.Repositories.AnswerRepositories;
@@ -36,11 +41,18 @@ builder.Services.AddGraphQL(options =>
     {
         options.EnableMetrics = true;
     })
+    .AddUserContextBuilder(httpContext => new GraphQLUserContext(httpContext.User))
     .AddSystemTextJson()
-    .AddGraphTypes(typeof(AppSchema), ServiceLifetime.Scoped);
+    .AddGraphTypes(typeof(AppSchema), ServiceLifetime.Scoped)
+    .AddGraphQLAuthorization(options =>
+    {
+        options.AddPolicy("AuthUsers", 
+            policy => policy
+                .AddAuthenticationSchemes("Bearer")
+                .RequireAuthenticatedUser());
+    });
 
 builder.Services.Configure<JwtTokenConfig>(builder.Configuration.GetSection("AppSettings"));
-
 
 var app = builder.Build();
 
@@ -54,6 +66,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.UseMiddleware<JwtMiddleware>();
 app.MapControllers();
 

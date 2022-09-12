@@ -5,13 +5,12 @@ using GraphQL.Types;
 using GraphQL.Validation;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
-using OnBoarding.Authorization;
 using OnBoarding.GraphQL;
 
 namespace OnBoarding.Controllers;
 
 [ApiController]
-// [Authorize]
+
 public class GraphQLController : ControllerBase
 {
     private readonly ISchema _schema;
@@ -54,7 +53,6 @@ public class GraphQLController : ControllerBase
         {
             if (HttpContext.Items.TryGetValue("GraphQLUserContext", out object? user) && user != null)
             {
-                executionOptions.UserContext = user as GraphQLUserContext;
                 executionOptions.UserContext = user as GraphQLUserContext;
             }
         }

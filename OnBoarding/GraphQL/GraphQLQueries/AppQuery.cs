@@ -15,16 +15,17 @@ namespace OnBoarding.GraphQL.GraphQLQueries;
 
 public class AppQuery : ObjectGraphType
 {
-    private readonly IHttpContextAccessor _httpContextAccessor;
+    // private readonly IHttpContextAccessor _httpContextAccessor;
     public AppQuery(IUserRepository userRepository)
     {
         Field<ListGraphType<UserType>>(
             "users",
             resolve: context =>
             {
+                // var userContext = context.UserContext as GraphQLUserContext;
                 return userRepository.GetAll();
             }
-        );
+        ).AuthorizeWith("AuthUsers");
         
         Field<UserType>(
             "user",

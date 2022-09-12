@@ -33,8 +33,7 @@ public class JwtUtils : IJwtUtils
         {
             Subject = new ClaimsIdentity(new[]
             {
-                new Claim("id", user.Id.ToString()),
-                new Claim("Role", "Admin"),
+                new Claim("id", user.Id.ToString())
             }),
             Expires = DateTime.UtcNow.AddDays(7),
             SigningCredentials = new SigningCredentials(
@@ -65,7 +64,8 @@ public class JwtUtils : IJwtUtils
             }, out SecurityToken validatedToken);
 
             var jwtToken = (JwtSecurityToken)validatedToken;
-            var userId = jwtToken.Claims.First(x => x.Type == "id").Value;  
+            var userId = jwtToken.Claims.First(x => x.Type == "id").Value;
+
             // return user id from JWT token if validation successful
             return userId;
         }

@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using OnBoarding.Authorization;
 using OnBoarding.Entities;
 using OnBoarding.Helper;
@@ -29,6 +30,8 @@ public class UserRepository : IUserRepository
     public User Register(User user)
     {
         // validate
+        if (string.IsNullOrWhiteSpace(user.Password))
+            throw new Exception("Password is required");
         if (_context.Users.Any(x => x.Email == user.Email))
             throw new Exception("Email '" + user.Email + "' is already taken");
 

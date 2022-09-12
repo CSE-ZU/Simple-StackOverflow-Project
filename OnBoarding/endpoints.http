@@ -2,15 +2,17 @@
 POST https://localhost:7276/graphql
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
-
 query{
   users{
     id,
     userName,
     email,
+		questions{
+			id
+		}
   }
 }
-
+###
 # mutation($User: userLoginRequest!) {
 #   login(user: $User) {
 #     token

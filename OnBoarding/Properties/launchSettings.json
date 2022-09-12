@@ -12,7 +12,7 @@
     "OnBoarding": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "ui/playground",
       "applicationUrl": "https://localhost:7276;http://localhost:5299",
       "environmentVariables": {
