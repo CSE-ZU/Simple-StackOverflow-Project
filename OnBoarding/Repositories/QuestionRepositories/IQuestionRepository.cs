@@ -5,13 +5,13 @@ namespace OnBoarding.Repositories.QuestionRepositories;
 
 public interface IQuestionRepository
 {
-    Task<IEnumerable> GetAllQuestions();
-    IEnumerable<Question> GetQuestionByUserId(Guid userId);
-    Task<Question> GetQuestionById(Guid questionId);
-    Task<Question> CreateQuestion(Question question);
-    // void UpdateQuestion(Question question);
-    // void DeleteQuestion(Question question);
-    // int GetQuestionCount();
-    // int GetQuestionCountByUserId(Guid userId);
+    void Vote(Guid questionId, Guid userId);
+    IEnumerable GetAllQuestions();
+    IEnumerable<Question> GetQuestionsByUserId(Guid userId);
+    Question GetQuestionById(Guid questionId);
+    Question CreateQuestion(Question question, Guid userId);
+    Question UpdateQuestion(Question question, Guid userId, Guid questionId);
+    void DeleteQuestion(Question question);
     
+
 }

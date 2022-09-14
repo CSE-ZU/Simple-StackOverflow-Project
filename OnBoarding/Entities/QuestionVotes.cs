@@ -8,5 +8,5 @@ public class QuestionVotes
     public Guid QuestionId { get; set; }
     public Question Question { get; set; }
 
-    public Count Count { get; set; }
+    public CountType CountType { get; set; }
 }

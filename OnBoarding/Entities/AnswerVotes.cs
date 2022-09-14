@@ -7,5 +7,6 @@ public class AnswerVotes
 
     public Guid AnswerId { get; set; }
     public Answer Answer { get; set; }
-    public Count Count { get; set; }
+    
+    public CountType CountType { get; set; }
 }

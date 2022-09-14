@@ -32,16 +32,14 @@ public class UserRepository : IUserRepository
         // validate
         if (string.IsNullOrWhiteSpace(user.Password))
             throw new Exception("Password is required");
+        
         if (_context.Users.Any(x => x.Email == user.Email))
             throw new Exception("Email '" + user.Email + "' is already taken");
-
+        
         if (_context.Users.Any(x => x.UserName == user.UserName))
             throw new Exception("Username '" + user.UserName + "' is already taken");
 
-
-        user.Id = Guid.NewGuid();
         user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
-
         _context.Users.Add(user);
         _context.SaveChanges();
         return user;
@@ -56,7 +54,6 @@ public class UserRepository : IUserRepository
         response.Id = user.Id;
         response.UserName = user.UserName;
         response.Token = _jwtUtils.GenerateToken(user);
-        
         return response;
     }
 }

@@ -77,7 +77,7 @@ namespace OnBoarding.Migrations
                 {
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     QuestionId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Count = table.Column<int>(type: "integer", nullable: false)
+                    CountType = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -102,7 +102,7 @@ namespace OnBoarding.Migrations
                 {
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     AnswerId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Count = table.Column<int>(type: "integer", nullable: false)
+                    CountType = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {

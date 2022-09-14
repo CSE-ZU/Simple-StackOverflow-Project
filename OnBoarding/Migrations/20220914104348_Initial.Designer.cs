@@ -12,7 +12,7 @@ using OnBoarding.Helper;
 namespace OnBoarding.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220909154424_Initial")]
+    [Migration("20220914104348_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,8 +60,9 @@ namespace OnBoarding.Migrations
                     b.Property<Guid>("AnswerId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("Count")
-                        .HasColumnType("integer");
+                    b.Property<string>("CountType")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("UserId", "AnswerId");
 
@@ -105,8 +106,9 @@ namespace OnBoarding.Migrations
                     b.Property<Guid>("QuestionId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("Count")
-                        .HasColumnType("integer");
+                    b.Property<string>("CountType")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("UserId", "QuestionId");
 

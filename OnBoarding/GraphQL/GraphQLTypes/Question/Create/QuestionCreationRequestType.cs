@@ -9,6 +9,5 @@ public class QuestionCreationRequestType : InputObjectGraphType
         Name = "questionCreationRequest";
         Field<NonNullGraphType<StringGraphType>>("Title");
         Field<NonNullGraphType<StringGraphType>>("Body");
-        Field<NonNullGraphType<StringGraphType>>("UserId");
     }
 }
