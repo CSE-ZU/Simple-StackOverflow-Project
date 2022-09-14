@@ -1,14 +1,6 @@
 using GraphQL;
 using GraphQL.Types;
-using HotChocolate.Types;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.EntityFrameworkCore;
-using OnBoarding.Authorization;
-using OnBoarding.Entities;
 using OnBoarding.GraphQL.GraphQLTypes;
-using OnBoarding.GraphQL.GraphQLTypes.Question;
-using OnBoarding.Repositories.QuestionRepositories;
 using OnBoarding.Repositories.UserRepositories;
 
 namespace OnBoarding.GraphQL.GraphQLQueries;
@@ -22,7 +14,6 @@ public class AppQuery : ObjectGraphType
             "users",
             resolve: context =>
             {
-                // var userContext = context.UserContext as GraphQLUserContext;
                 return userRepository.GetAll();
             }
         ).AuthorizeWith("AuthUsers");
@@ -41,7 +32,7 @@ public class AppQuery : ObjectGraphType
                 }
                 return userRepository.GetUserById(id);
             }
-        );
+        ).AuthorizeWith("AuthUsers");
 
     }
     

@@ -45,6 +45,6 @@ public class AppMutation : ObjectGraphType
                 var question = context.GetArgument<Question>("question");
                 return questionRepository.CreateQuestion(question);
             }
-        );
+        ).AuthorizeWith("AuthUsers");
     }
 }

@@ -15,6 +15,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Answer> Answers { get; set; }
     public DbSet<AnswerVotes> AnswerVotes { get; set; }
     public DbSet<QuestionVotes> QuestionVotes { get; set; }
+    
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -37,8 +38,10 @@ public class ApplicationDbContext : DbContext
 
         // QuestionVotes relation 
         modelBuilder.Entity<QuestionVotes>().HasKey(v => new { v.UserId, v.QuestionId });
+        modelBuilder.Entity<QuestionVotes>().Property(countType => countType.CountType).HasConversion<string>();
 
         // AnswersVotes relation 
         modelBuilder.Entity<AnswerVotes>().HasKey(v => new { v.UserId, v.AnswerId });
+        modelBuilder.Entity<AnswerVotes>().Property(countType => countType.CountType).HasConversion<string>();
     }
 }

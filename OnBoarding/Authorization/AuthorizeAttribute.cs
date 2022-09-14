@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -17,9 +18,23 @@ public class AuthorizeAttribute : Attribute, IAuthorizationFilter
             return;
         // authorization
         var user = (User)context.HttpContext.Items["User"];
-        if (user == null)
+
+        if (user != null)
+        {
+            var identity = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim("UserId", user.Id.ToString()),
+                    new Claim(ClaimTypes.Role,"AuthUsers")
+                },
+                authenticationType:"Bearer");
+            context.HttpContext.User = new ClaimsPrincipal(identity);
+            context.HttpContext.Items["GraphQLUserContext"] = new GraphQLUserContext { User = context.HttpContext.User};
+        }
+        else
+        {
             context.Result = new JsonResult(new { message = "Unauthorized" }) 
                 { StatusCode = StatusCodes.Status401Unauthorized };
+        }
         
     }
 }
