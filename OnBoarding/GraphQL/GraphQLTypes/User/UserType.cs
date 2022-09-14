@@ -14,7 +14,7 @@ public class UserType : ObjectGraphType<User>
         Field(x => x.Email).Description("The email of the user.");
         Field<ListGraphType<QuestionCreationResponseType>>(
             "Questions",
-            resolve: context => questionRepository.GetQuestionsByUserId(context.Source.Id)
+            resolve: context => questionRepository.GetQuestionByUserId(context.Source.Id)
         );
     }
 }

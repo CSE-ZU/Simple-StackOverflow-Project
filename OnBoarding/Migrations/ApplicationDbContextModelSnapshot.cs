@@ -58,9 +58,8 @@ namespace OnBoarding.Migrations
                     b.Property<Guid>("AnswerId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("CountType")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("Count")
+                        .HasColumnType("integer");
 
                     b.HasKey("UserId", "AnswerId");
 
@@ -104,9 +103,8 @@ namespace OnBoarding.Migrations
                     b.Property<Guid>("QuestionId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("CountType")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("Count")
+                        .HasColumnType("integer");
 
                     b.HasKey("UserId", "QuestionId");
 

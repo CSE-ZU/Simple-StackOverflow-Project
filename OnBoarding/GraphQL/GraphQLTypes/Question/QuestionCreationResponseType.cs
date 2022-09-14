@@ -6,7 +6,7 @@ public class QuestionCreationResponseType : ObjectGraphType<Entities.Question>
 {
     public QuestionCreationResponseType()
     {
-        Field(x => x.Id, type: typeof(IdGraphType));
+        Field(x => x.Id);
         Field(x => x.CreationTime);
         Field(x => x.UserId);
         Field(x => x.Title);
