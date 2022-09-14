@@ -35,12 +35,6 @@
     <ItemGroup>
       <Compile Remove="Migrations\20220914104348_Initial.cs" />
       <Compile Remove="Entities\CountType.cs" />
-      <Compile Remove="GraphQL\GraphQLTypes\Question\Update\QuestionUpdateResponseType.cs" />
-      <Compile Remove="GraphQL\GraphQLTypes\Question\Create\QuestionCreationResponseType.cs" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="GraphQL\GraphQLTypes\Question\Update" />
     </ItemGroup>
 
 </Project>
